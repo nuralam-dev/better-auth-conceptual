@@ -1,0 +1,50 @@
+1. create nextjs
+2.npm install better-auth
+3.npm install mongodb
+4.npm install @better-auth/mongo-adapter
+5. mongodb configure in auth.js
+6. create sign up page
+7. hero ui install
+8. import @import "@heroui/styles";  in global css
+9. design sign up page
+10. /app/api/auth/[...all]/route.ts
+11.lib/auth-client.ts
+12. on submit signup ===== const { data:signUpData, error } = await signUp.email({
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            callbackURL: "/", 
+        });
+
+13. on submit singIn =====  const { data: signInData, error } = await signIn.email({
+            email: data.email, // required, The email address of the user.
+            password: data.password, // required, The password of the user. It should be at least 8 characters long and max 128 by default.
+            callbackURL: "/", // An optional URL to redirect to after the user signs in. (optional)
+        });
+
+14. Session management => const { data: session } = authClient.useSession()
+
+
+15. signOut = > await authClient.signOut({
+  fetchOptions: {
+    onSuccess: () => {
+      router.push("/login"); // redirect to login page
+    },
+  },
+});
+
+16. Create proxy.js for private route
+
+17. Go to google console and create Oauth id -> set BETTER_AUTH_GOOGLE_CLIENT_ID,BETTER_AUTH_GOOGLE_CLIENT_SECRET in .env 
+
+18. add in auth.js  ------> socialProviders: {
+        google: {
+            clientId: process.env.BETTER_AUTH_GOOGLE_CLIENT_ID,
+            clientSecret: process.env.BETTER_AUTH_GOOGLE_CLIENT_SECRET,
+        },
+    },
+
+19. Email Verification -> 
+a. resend.com
+b.create api key
+c. add api key in .env
